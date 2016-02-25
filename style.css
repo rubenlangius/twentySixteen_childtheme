@@ -11,3 +11,44 @@
  Text Domain:  twenty-sixteen-child
 */
 
+body
+{
+    background-color: #fff;
+}
+
+.main-navigation .primary-menu > li
+{
+    display: inline-block;
+    float: none;
+}
+
+.site-header-menu
+{
+    width: 100%;
+}
+
+.site-branding
+{
+    margin: 1.75em auto;
+}
+
+#menu-primary
+{
+    text-align: center;
+}
+
+.site-title
+{
+    font-size: 40px;
+    font-weight: 100;
+
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.site-header {
+	padding-top: 20px;
+	padding-bottom: 75px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
