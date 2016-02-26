@@ -123,3 +123,12 @@ body
 .sidetext .entry-summary {
     margin: 0;
 }
+
+.container.featured {
+    padding: 15px 0;
+    border: 2px solid #2D323A;
+}
+
+.feature-image .post-thumbnail {
+    margin-bottom: 0;
+}
