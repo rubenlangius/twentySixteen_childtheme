@@ -117,3 +117,9 @@ body
         padding-right: 8%;
     }
 }
+
+/* sticky post style rules */
+
+.sidetext .entry-summary {
+    margin: 0;
+}

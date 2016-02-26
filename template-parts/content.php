@@ -9,11 +9,20 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
+	<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
+		<div class="col-sm-6">
+			<?php twentysixteen_post_thumbnail(); ?>
+		</div>
+		<div class="col-sm-6 sidetext">
 			<span class="sticky-post"><?php _e( 'Featured', 'twentysixteen' ); ?></span>
-		<?php endif; ?>
+			<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+			<?php twentysixteen_excerpt(); ?>
 
+		</div>
+	<?php else: ?>
+
+
+	<header class="entry-header">		
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 	</header><!-- .entry-header -->
 
@@ -54,4 +63,5 @@
 			);
 		?>
 	</footer><!-- .entry-footer -->
+	<?php endif; ?>
 </article><!-- #post-## -->
