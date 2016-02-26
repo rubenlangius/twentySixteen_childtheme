@@ -11,3 +11,109 @@
  Text Domain:  twenty-sixteen-child
 */
 
+body
+{
+    background-color: #fff;
+}
+
+/* Header changes */
+
+#menu-primary
+{
+    text-align: center;
+}
+
+.site-logo
+{
+    display: none;
+    float: left;
+    width: 25px;
+    margin-right: 10%;
+}
+
+.site-title
+{
+    font-weight: 300;
+
+    clear: right;
+
+    white-space: nowrap;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.site-header
+{
+    padding-top: 20px;
+    padding-bottom: 75px;
+}
+
+.main-navigation a
+{
+    text-transform: lowercase;
+}
+
+.main-navigation .current-menu-item > a,
+.main-navigation .current-menu-ancestor > a
+{
+    font-weight: initial;
+
+    color: #5b91ac;
+    border-bottom: 2px solid #5b91ac;
+}
+
+.main-navigation li:hover > a,
+.main-navigation li.focus > a,
+.main-navigation a:hover,
+.main-navigation a:focus,
+.site-branding .site-title a:hover
+{
+    color: #5b91ac;
+}
+
+@media screen and (min-width: 350px)
+{
+    .site-logo
+    {   
+        display: block;
+        width: 25px;
+    }
+}
+
+@media screen and (min-width: 710px)
+{
+    .site-logo
+    {
+        width: 35px;
+    }
+}
+
+@media screen and (min-width: 910px)
+{
+    .site-header-menu
+    {
+        width: 100%;
+    }
+
+    .main-navigation .primary-menu > li
+    {
+        display: inline-block;
+        float: none;
+    }
+
+    .site-logo
+    {
+        width: 50px;
+    }
+
+    .site-title
+    {
+        font-size: 40px;
+    }
+
+    .site-branding
+    {
+        margin: 1.75em auto;
+        padding-right: 8%;
+    }
+}
