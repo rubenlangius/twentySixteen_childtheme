@@ -18,8 +18,6 @@ body
 
 /* Header changes */
 
-
-
 #menu-primary
 {
     text-align: center;
@@ -27,7 +25,7 @@ body
 
 .site-title
 {
-    font-weight: 100;
+    font-weight: 300;
 
     letter-spacing: 5px;
     text-transform: uppercase;
@@ -39,11 +37,25 @@ body
     padding-bottom: 75px;
 }
 
+.main-navigation a
+{
+    text-transform: lowercase;
+}
+
+.main-navigation .current-menu-item > a,
+.main-navigation .current-menu-ancestor > a
+{
+    font-weight: initial;
+
+    color: #5b91ac;
+    border-bottom: 2px solid #5b91ac;
+}
 
 .main-navigation li:hover > a,
 .main-navigation li.focus > a,
 .main-navigation a:hover,
-.main-navigation a:focus
+.main-navigation a:focus,
+.site-branding .site-title a:hover
 {
     color: #5b91ac;
 }
