@@ -6,7 +6,7 @@ function theme_enqueue_styles() {
 
     $parent_style = 'parent-style';
 
-    wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/bootstrap/bootstrap.css');
+    wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.css');
     wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'child-style',
         get_stylesheet_directory_uri() . '/style.css',
@@ -52,13 +52,27 @@ function twentysixteen_excerpt( $class = 'excerpt' ) {
     <?php endif;
 }
 
+// add a custom excerpt filter so manually generated excerpts also have a 'read more' link
+
+function manual_excerpt_more( $excerpt ) {
+    $excerpt_more = '';
+    if( has_excerpt() ) {
+        $link = sprintf( '<a href="%1$s" class="more-link">%2$s</a>',
+        esc_url( get_permalink( get_the_ID() ) ),
+        /* translators: %s: Name of current post */
+        sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentysixteen' ), get_the_title( get_the_ID() ) )
+    );
+    }
+    return $excerpt . '&hellip; ' . $link;
+}
+add_filter( 'get_the_excerpt', 'manual_excerpt_more' );
+
 // change the thumbnail function
 
 function twentysixteen_post_thumbnail() {
     if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
         return;
     }
-
     if ( is_singular() ) :
     ?>
 
@@ -77,5 +91,10 @@ function twentysixteen_post_thumbnail() {
 
 add_image_size( 'loop-thumb', 600, 600 ); 
 
+// custom post formats list
+add_action( 'after_setup_theme', 'childtheme_formats', 11 );
+function childtheme_formats(){
+     add_theme_support( 'post-formats', array( 'aside', 'gallery', 'image', 'status' ) );
+}
 
 ?>

@@ -9,37 +9,23 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
-		<div class="container-fluid featured">
+	<?php if ( ! is_sticky() ) : ?>
+		<!-- not a sticky post  -->
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-6 hidden-xs feature-image">
+				<!-- standard post format -->
+				<div class="col-xs-12 col-sm-12 col-md-7 pull-right excerpt-text">
+					<?php the_category( ', ' ); ?>
+					<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-5 pull-left image-excerpt">
 					<?php twentysixteen_post_thumbnail(); ?>
 				</div>
-				<div class="col-sm-6 sidetext">
-					<span class="sticky-post"><?php _e( 'Featured', 'twentysixteen' ); ?></span>
-					<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-					<?php twentysixteen_excerpt(); ?>
+				<div class="col-xs-12 col-sm-8 col-md-7 pull-right excerpt-text">
+					<?php the_excerpt(); ?>	
 				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 excerpt-footer"></div>
 			</div>
 		</div>
-	<?php else: ?>
-
-	<div class="container-fluid">
-		<div class="row">
-			<header class="col-sm-12">		
-				
-			</header><!-- .entry-header -->
-			<div class="col-sm-5 hidden-xs">
-				<?php twentysixteen_post_thumbnail(); ?>
-			</div>
-			<div class="col-sm-6">
-				<?php twentysixteen_entry_taxonomies() ?>
-				<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-				<?php twentysixteen_excerpt() ?>
-			</div>
-		</div>
-	</div>
-
-
 	<?php endif; ?>
 </article><!-- #post-## -->

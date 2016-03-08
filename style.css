@@ -127,46 +127,70 @@ body
 
 /* post style rules */
 
-.sidetext, .excerpt
+.excerpt-text .entry-title
+{
+    font-size: 1.4375em;
+    line-height: 1.304347826;
+}
+
+
+.sidetext,
+.excerpt
 {
     margin: 0!important;
 }
 
 .container-fluid.featured
 {
-    padding: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 0;
+    padding-left: 15px;
 }
 
 .feature-image .post-thumbnail
 {
-    margin-bottom: 0;
+    overflow: hidden;
+
+    margin: 0;
+    margin-bottom: 15px;
 }
 
-.sticky
+.image-excerpt .post-thumbnail
 {
-    background-color: #f2f2f2;
+    margin: 0;
+    margin-bottom: 15px;
 }
 
-.post-loop {
+.post-loop
+{
     margin-bottom: 20px;
 }
 
-article:not(.sticky) .container-fluid{
-    border-bottom: 2px solid #F2F2F2;
+.excerpt-text p
+{
+    margin-bottom: 15;
+}
+
+article:not(.sticky) .container-fluid .excerpt-footer
+{
+    margin-top: 60px;
+    margin-right: 15px;
+    margin-left: 15px;
+
+    border-bottom: 2px solid #f2f2f2;
 }
 
 @media screen and (min-width: 710px)
 {
-    .site-main > article {
+    .site-main > article
+    {
         margin-bottom: 4.25em;
     }
 
-    .post-loop {
-    margin-bottom: 40px;
-}
-    .sticky
+    .post-loop
     {
-        background-color: #fff;
+        margin-bottom: 40px;
     }
 
     .container-fluid.featured
