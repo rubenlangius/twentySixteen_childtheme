@@ -27,6 +27,7 @@ body
 {
     display: none;
     float: left;
+
     width: 25px;
     margin-right: 10%;
 }
@@ -45,7 +46,7 @@ body
 .site-header
 {
     padding-top: 20px;
-    padding-bottom: 75px;
+    padding-bottom: 35px;
 }
 
 .main-navigation a
@@ -74,8 +75,9 @@ body
 @media screen and (min-width: 350px)
 {
     .site-logo
-    {   
+    {
         display: block;
+
         width: 25px;
     }
 }
@@ -85,6 +87,11 @@ body
     .site-logo
     {
         width: 35px;
+    }
+
+    .site-header
+    {
+        padding-bottom: 75px;
     }
 }
 
@@ -115,5 +122,79 @@ body
     {
         margin: 1.75em auto;
         padding-right: 8%;
+    }
+}
+
+/* post style rules */
+
+.excerpt-text .entry-title
+{
+    font-size: 1.4375em;
+    line-height: 1.304347826;
+}
+
+
+.sidetext,
+.excerpt
+{
+    margin: 0!important;
+}
+
+.container-fluid.featured
+{
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 0;
+    padding-left: 15px;
+}
+
+.feature-image .post-thumbnail
+{
+    overflow: hidden;
+
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.image-excerpt .post-thumbnail
+{
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.post-loop
+{
+    margin-bottom: 20px;
+}
+
+.excerpt-text p
+{
+    margin-bottom: 15;
+}
+
+article:not(.sticky) .container-fluid .excerpt-footer
+{
+    margin-top: 60px;
+    margin-right: 15px;
+    margin-left: 15px;
+
+    border-bottom: 2px solid #f2f2f2;
+}
+
+@media screen and (min-width: 710px)
+{
+    .site-main > article
+    {
+        margin-bottom: 4.25em;
+    }
+
+    .post-loop
+    {
+        margin-bottom: 40px;
+    }
+
+    .container-fluid.featured
+    {
+        border: 2px solid #2d323a;
     }
 }
