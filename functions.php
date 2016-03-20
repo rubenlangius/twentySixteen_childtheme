@@ -6,6 +6,9 @@ function theme_enqueue_styles() {
 
     $parent_style = 'parent-style';
 
+    wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', array(), '3', true );
+    wp_enqueue_script( 'google-map-init', get_stylesheet_directory_uri() . '/js/google-maps.js', array('google-map', 'jquery'), '0.1', true );
+
     wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.css');
     wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'child-style',
@@ -145,7 +148,7 @@ function custom_post_type() {
         'labels'                => $labels,
         'supports'              => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'trackbacks', 'revisions', 'custom-fields', 'page-attributes', ),
         'taxonomies'            => array( 'category', 'post_tag' ),
-        'hierarchical'          => false,
+        'hierarchical'          => true,
         'public'                => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
@@ -157,11 +160,47 @@ function custom_post_type() {
         'has_archive'           => true,        
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        'capability_type'       => 'page',
+        'capability_type'       => 'post',
     );
     register_post_type( 'havens', $args );
 
 }
 add_action( 'init', 'custom_post_type', 0 );
+
+
+function twentysixteen_entry_meta() {
+    if ( 'post' === get_post_type() || 'havens' === get_post_type() ) {
+        $author_avatar_size = apply_filters( 'twentysixteen_author_avatar_size', 49 );
+        printf( '<span class="byline"><span class="author vcard">%1$s<span class="screen-reader-text">%2$s </span> <a class="url fn n" href="%3$s">%4$s</a></span></span>',
+            get_avatar( get_the_author_meta( 'user_email' ), $author_avatar_size ),
+            _x( 'Author', 'Used before post author name.', 'twentysixteen' ),
+            esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+            get_the_author()
+        );
+    }
+
+    if ( in_array( get_post_type(), array( 'post', 'attachment', 'havens' ) ) ) {
+        twentysixteen_entry_date();
+    }
+
+    $format = get_post_format();
+    if ( current_theme_supports( 'post-formats', $format ) ) {
+        printf( '<span class="entry-format">%1$s<a href="%2$s">%3$s</a></span>',
+            sprintf( '<span class="screen-reader-text">%s </span>', _x( 'Format', 'Used before post format.', 'twentysixteen' ) ),
+            esc_url( get_post_format_link( $format ) ),
+            get_post_format_string( $format )
+        );
+    }
+
+    if ( 'post' === get_post_type() || 'havens' === get_post_type() ) {
+        twentysixteen_entry_taxonomies();
+    }
+
+    if ( ! is_singular() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+        echo '<span class="comments-link">';
+        comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'twentysixteen' ), get_the_title() ) );
+        echo '</span>';
+    }
+}
 
 ?>

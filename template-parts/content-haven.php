@@ -11,16 +11,57 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-
 	</header><!-- .entry-header -->
-
-
-	<?php twentysixteen_post_thumbnail(); ?>
+ 	<?php 
+ 	$location = get_field('locatie');
+	if( !empty($location) ):
+	?>
+	<div class="acf-map">
+		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
+	</div>
+	<?php endif; ?>
 
 	<div class="entry-content">
-		<?php
-			the_content();
+		
 
+		<?php
+			$fields = get_field_objects();
+			if( $fields ) : ?>
+			<div class="container-fluid">
+				<div class="row specscontainer">
+						<?php	
+						unset($fields['locatie']);
+						$len = count($fields);
+						$firsthalf = array_slice($fields, 0, $len / 2);
+						$secondhalf = array_slice($fields, $len / 2);
+						echo '<div class="col-xs-6">';
+						echo "<ul class='specs'>";
+						foreach( $firsthalf as $field_name => $field )
+						{
+							echo '<li>';
+								echo '<h7>' . $field['label'] . ' : ' . $field['value'] .'</h7>';
+							echo '</li>';
+						}
+						echo "</ul>";
+						echo '</div>
+					<div class="col-xs-6">';
+						echo "<ul class='specs'>";
+						foreach( $secondhalf as $field_name => $field )
+						{
+							echo '<li>';
+								echo '<h7>' . $field['label'] . ' : ' . $field['value'] .'</h7>';
+							echo '</li>';
+						}
+						echo "</ul>";
+						?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+
+			<?php the_content(); ?>
+
+			<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentysixteen' ) . '</span>',
 				'after'       => '</div>',
