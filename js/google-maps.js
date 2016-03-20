@@ -63,11 +63,30 @@ function add_marker( $marker, map ) {
 	// var
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
 
-	// create marker
-	var marker = new google.maps.Marker({
-		position	: latlng,
-		map			: map
-	});
+	var category = $marker.attr('cat');
+
+	if (category == 'Haven') {
+		// create marker
+		var marker = new google.maps.Marker({
+			position	: latlng,
+			map			: map,
+			icon		: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+		});
+	} else if (category == "Ankerplaats") {
+		// create marker
+		var marker = new google.maps.Marker({
+			position	: latlng,
+			map			: map,
+			icon		: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+		});
+	} else {
+		// create marker
+		var marker = new google.maps.Marker({
+			position	: latlng,
+			map			: map,
+			icon		: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+		});
+	}
 
 	// add to array
 	map.markers.push( marker );

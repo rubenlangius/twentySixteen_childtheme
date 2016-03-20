@@ -20,25 +20,51 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-4">
+						<ul class="legenda">
+						<li class="circle green"></li>
+						<li>Marrekrite</li>
+						</ul>
+					</div>
+					<div class="col-sm-4">
+						<ul class="legenda">
+						<li class="circle blue"></li>
+						<li>Ankerplaats</li>
+						</ul>
+					</div>
+					<div class="col-sm-4">
+						<ul class="legenda">
+						<li class="circle yellow"></li>
+						<li>Haven</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
 		<?php if ( have_posts() ) : ?>
-
-			
-
+			<div class="acf-map archivemap">
 			<?php
 			// Start the Loop.
 			while ( have_posts() ) : the_post();
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
+				$location = get_field('locatie');
 
+			?>
+			<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'>
+				<?php the_post_thumbnail( 'medium' ); ?>
+				<?php the_title( sprintf( '<h2><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>				
+				<p class="address"><?php echo 'Lat : ' . $location['lat'] . ', Lng : ' . $location['lng']; ?></p>
+				<?php the_excerpt(); ?>	
+			</div>
+
+			<?php
 			// End the loop.
-			endwhile;
+			endwhile; ?>
 
+			</div>
+			<?php
 			// Previous/next page navigation.
 			the_posts_pagination( array(
 				'prev_text'          => __( 'Previous page', 'twentysixteen' ),

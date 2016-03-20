@@ -17,7 +17,7 @@
 	if( !empty($location) ):
 	?>
 	<div class="acf-map">
-		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
+		<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'></div>
 	</div>
 	<?php endif; ?>
 
