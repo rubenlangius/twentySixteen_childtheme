@@ -63,26 +63,29 @@ get_header(); ?>
 			</header><!-- .page-header -->
 
 		<?php if ( have_posts() ) : ?>
+			
+			<div class="entry-content">
 			<div class="acf-map archivemap">
-			<?php
-			// Start the Loop.
-			while ( have_posts() ) : the_post();
+				<?php
+				// Start the Loop.
+				while ( have_posts() ) : the_post();
 
-				$location = get_field('locatie');
+					$location = get_field('locatie');
 
-			?>
-			<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'>
-				<?php the_post_thumbnail( 'medium' ); ?>
-				<?php the_title( sprintf( '<h2><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>				
-				<p class="address"><?php echo 'Lat : ' . $location['lat'] . ', Lng : ' . $location['lng']; ?></p>
-				<?php the_excerpt(); ?>	
+				?>
+				<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'>
+					<?php the_post_thumbnail( 'medium' ); ?>
+					<?php the_title( sprintf( '<h2><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>				
+					<p class="address"><?php echo 'Lat : ' . $location['lat'] . ', Lng : ' . $location['lng']; ?></p>
+					<?php the_excerpt(); ?>	
+				</div>
+
+				<?php
+				// End the loop.
+				endwhile; ?>
 			</div>
+		</div>
 
-			<?php
-			// End the loop.
-			endwhile; ?>
-
-			</div>
 			<?php
 			// Previous/next page navigation.
 			the_posts_pagination( array(
