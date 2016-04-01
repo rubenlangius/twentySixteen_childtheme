@@ -22,13 +22,13 @@
 			if( $fields ) : ?>
 			<div class="container-fluid">
 				<div class="row specscontainer">
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6">
 						<ul class='specs'>
 							<li>Ingrediënten</li>
 							<?php echo get_field( "ingredienten" );?>
 						</ul>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6">
 						<ul class='specs'>
 							<li>Aantal personen</li>
 							<?php echo get_field( "aantal_personen" );?>

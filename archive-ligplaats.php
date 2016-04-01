@@ -72,7 +72,7 @@ get_header(); ?>
 
 			?>
 			<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'>
-				<?php the_post_thumbnail( 'medium' ); ?>
+				<div class="hidden-xs"><?php the_post_thumbnail( 'medium' ); ?></div>
 				<?php the_title( sprintf( '<h2><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>				
 				<p class="address"><?php echo 'Lat : ' . $location['lat'] . ', Lng : ' . $location['lng']; ?></p>
 				<?php the_excerpt(); ?>	

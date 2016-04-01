@@ -29,7 +29,7 @@
 			if( $fields ) : ?>
 			<div class="container-fluid">
 				<div class="row specscontainer">
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6">
 						<ul class='specs'>
 							<li>Beoordeling</li>
 							<?php 
@@ -59,7 +59,7 @@
 							?>
 						</ul>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6">
 						<ul class='specs'>
 							<li>Voorzieningen</li>
 							<?php 

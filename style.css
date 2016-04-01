@@ -110,6 +110,27 @@ h1.entry-title {
 
 }
 
+@media screen and (min-width: 56.875em) {
+    .entry-header,
+    .post-thumbnail,
+    .entry-content,
+    .entry-summary,
+    .entry-footer,
+    .comments-area,
+    .image-navigation,
+    .post-navigation,
+    .pagination,
+    .page-header,
+    .page-content,
+    .content-bottom-widgets {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+
+
+}
+
 @media screen and (min-width: 350px)
 {
     .site-logo
