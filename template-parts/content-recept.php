@@ -11,16 +11,42 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="page-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-
 	</header><!-- .entry-header -->
-
-
-	<?php twentysixteen_post_thumbnail(); ?>
+ 	
+ 	<?php twentysixteen_post_thumbnail(); ?>
 
 	<div class="entry-content">
+		
 		<?php
-			the_content();
+			$fields = get_field_objects();
+			if( $fields ) : ?>
+			<div class="container-fluid">
+				<div class="row specscontainer">
+					<div class="col-xs-6">
+						<ul class='specs'>
+							<li>Ingrediënten</li>
+							<?php echo get_field( "ingredienten" );?>
+						</ul>
+					</div>
+					<div class="col-xs-6">
+						<ul class='specs'>
+							<li>Aantal personen</li>
+							<?php echo get_field( "aantal_personen" );?>
+							<li>Bereidingstijd</li>
+							<?php echo get_field( "bereidingstijd" ) . ' minuten';?>
+							<li>Benodigdheden</li>
+							<?php echo get_field( "benodigdheden" );?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
 
+		
+
+			<?php the_content(); ?>
+
+			<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentysixteen' ) . '</span>',
 				'after'       => '</div>',
