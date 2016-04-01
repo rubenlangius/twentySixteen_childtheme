@@ -13,9 +13,9 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<?php twentysixteen_post_thumbnail(); ?>
+	 	<?php twentysixteen_post_thumbnail(); ?>
 
+	<div class="entry-content">
 		<?php
 		the_content();
 
@@ -27,19 +27,28 @@
 			'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>%',
 			'separator'   => '<span class="screen-reader-text">, </span>',
 		) );
+
+		if ( '' !== get_the_author_meta( 'description' ) ) {
+				get_template_part( 'template-parts/biography' );
+			}
+		echo get_the_author_meta( 'description' );
 		?>
+
+
 	</div><!-- .entry-content -->
 
-	<?php
-		edit_post_link(
-			sprintf(
-				/* translators: %s: Name of current post */
-				__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'twentysixteen' ),
-				get_the_title()
-			),
-			'<footer class="entry-footer"><span class="edit-link">',
-			'</span></footer><!-- .entry-footer -->'
-		);
-	?>
-
+	<footer class="entry-footer">
+		<?php twentysixteen_entry_meta(); ?>
+		<?php
+			edit_post_link(
+				sprintf(
+					/* translators: %s: Name of current post */
+					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'twentysixteen' ),
+					get_the_title()
+				),
+				'<span class="edit-link">',
+				'</span>'
+			);
+		?>
+	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->

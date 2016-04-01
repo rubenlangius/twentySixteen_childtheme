@@ -47,21 +47,15 @@
 					 */
 					do_action( 'twentysixteen_credits' );
 				?>
-				<span class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
-				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentysixteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentysixteen' ), 'WordPress' ); ?></a>
+				<?php $description = get_bloginfo( 'description', 'display' ); ?>
+				<p style="margin:0;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> &copy; 2016. <br/>
+				<?php echo $description; ?></p>
 			</div><!-- .site-info -->
+
 		</footer><!-- .site-footer -->
 	</div><!-- .site-inner -->
 </div><!-- .site -->
 <?php wp_footer(); ?>
-<script type="text/javascript">
-var $j = jQuery.noConflict();
-$j(document).ready(function() {
-  $j(".js-example-placeholder-single").select2({
-  	placeholder: "categorie",
-  	allowClear: true
-  });
-});
-</script>
+
 </body>
 </html>

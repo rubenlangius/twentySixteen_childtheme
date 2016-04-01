@@ -28,41 +28,49 @@ get_header(); ?>
 			<?php endif; ?>
 
 			<?php
+			$sticky = get_option( 'sticky_posts' );
 			$args = array(
-			   'post__in' => get_option('sticky_posts'),
-			   'caller_get_posts' => 1
+				'posts_per_page' => 1,
+				'post__in'  => $sticky,
+				'ignore_sticky_posts' => 1
 			);
-			$my_query = new WP_Query($args) ; ?>
-			<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
+			$query = new WP_Query( $args );
+			if ( isset($sticky[0]) ) :
+				while ($query->have_posts()) : $query->the_post(); ?>
 					<div class="container-fluid featured">
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-6 excerpt-text pull-right">
+							<div class="col-xs-12 col-sm-12 col-md-8 excerpt-text pull-right">
 								<span class="sticky-post"><?php _e( 'Featured', 'twentysixteen' ); ?></span>
 								<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-6 feature-image pull-left">
+							<div class="col-xs-12 col-sm-4 col-md-4 feature-image pull-left">
 								<?php twentysixteen_post_thumbnail(); ?>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-6 excerpt-text pull-right">
+							<div class="col-xs-12 col-sm-8 col-md-8 excerpt-text pull-right">
 								<?php twentysixteen_excerpt(); ?>
 							</div>
 						</div>
 					</div>
-			<?php endwhile; ?>
+			<?php
+			endwhile;
+			endif;
+			if ( !isset($sticky[0]) ){
+				echo"<div class='page-header' style='margin-left:15px; margin-right:15px; margin-bottom:3.9em;'><h1 class='entry-title'>Blog Overzicht</h1></div>";
+			}
+			 ?>
 
 
 			<?php
 			// Start the loop.
-			$count = 0;
 			while ( have_posts() ) : the_post();
-
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
-				$count = $count +1;
+				if (get_field( "frontpage" )) :
+					/*
+					 * Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part( 'template-parts/content', get_post_format() );
+				endif;
 			// End the loop.
 			endwhile;
 
@@ -81,7 +89,9 @@ get_header(); ?>
 		?>
 
 		</main><!-- .site-main -->
+
 	</div><!-- .content-area -->
 
+		<?php get_footer(); ?>
+
 <?php get_sidebar(); ?>
-<?php get_footer(); ?>

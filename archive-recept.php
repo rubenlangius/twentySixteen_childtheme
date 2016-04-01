@@ -21,69 +21,49 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
+		<?php if ( have_posts() ) : ?>
+
 			<header class="page-header">
-				
 				<?php 
-				$page = get_page_by_path('ligplaatsen-overzicht');
+				$page = get_page_by_path('recepten-overzicht');
 				$the_query = new WP_Query( 'page_id='.$page->ID );
 				while ( $the_query->have_posts() ) :
-					$the_query->the_post(); 
-				?>
-
-				<div class="container-fluid no-padding">
-					<div class="row">
-						<div class="col-sm-12">
-							<h1 class="entry-title">
-								<?php the_title(); ?>
-							</h1>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-8 pull-left">
-							<?php the_content(); ?>
-						</div>
-						<div class="col-sm-3 pull-right">
-							<ul>
-								<li class="legenda green">
-								<p>Marrekrite</p>
-								</li>
-								<li class="legenda blue">
-								<p>Ankerplaats</p>
-								</li>
-								<li class="legenda yellow">
-								<p>Haven</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<?php endwhile;
+					$the_query->the_post(); ?>
+				    <h1 class="entry-title">
+				    <?php the_title(); ?>
+					</h1>
+				    <?php the_content(); ?>
+				<?php    
+				endwhile;
 				wp_reset_postdata();
 				?>
 			</header><!-- .page-header -->
 
-		<?php if ( have_posts() ) : ?>
-			<div class="acf-map archivemap">
 			<?php
 			// Start the Loop.
-			while ( have_posts() ) : the_post();
+			while ( have_posts() ) : the_post();?>
 
-				$location = get_field('locatie');
-
-			?>
-			<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>" cat='<?php echo get_the_category()[0]->name; ?>'>
-				<?php the_post_thumbnail( 'medium' ); ?>
-				<?php the_title( sprintf( '<h2><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>				
-				<p class="address"><?php echo 'Lat : ' . $location['lat'] . ', Lng : ' . $location['lng']; ?></p>
-				<?php the_excerpt(); ?>	
+				<div class="container-fluid no-padding page-header" style="border:none;">
+			<div class="row">
+				<!-- standard post format -->
+				<div class="col-xs-12 col-sm-12 col-md-7 pull-right excerpt-text">
+					<?php the_category( ', ' ); ?>
+					<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-5 pull-left image-excerpt">
+					<?php twentysixteen_post_thumbnail(); ?>
+				</div>
+				<div class="col-xs-12 col-sm-8 col-md-7 pull-right excerpt-text">
+					<?php the_excerpt(); ?>	
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 excerpt-footer"></div>
 			</div>
+		</div>
 
 			<?php
 			// End the loop.
-			endwhile; ?>
+			endwhile;
 
-			</div>
-			<?php
 			// Previous/next page navigation.
 			the_posts_pagination( array(
 				'prev_text'          => __( 'Previous page', 'twentysixteen' ),

@@ -9,7 +9,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+	<header class="page-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
  	<?php 
@@ -29,34 +29,69 @@
 			if( $fields ) : ?>
 			<div class="container-fluid">
 				<div class="row specscontainer">
-						<?php	
-						unset($fields['locatie']);
-						$len = count($fields);
-						$firsthalf = array_slice($fields, 0, $len / 2);
-						$secondhalf = array_slice($fields, $len / 2);
-						echo '<div class="col-xs-6">';
-						echo "<ul class='specs'>";
-						foreach( $firsthalf as $field_name => $field )
-						{
-							echo '<li>';
-								echo '<h7>' . $field['label'] . ' : ' . $field['value'] .'</h7>';
-							echo '</li>';
-						}
-						echo "</ul>";
-						echo '</div>
-					<div class="col-xs-6">';
-						echo "<ul class='specs'>";
-						foreach( $secondhalf as $field_name => $field )
-						{
-							echo '<li>';
-								echo '<h7>' . $field['label'] . ' : ' . $field['value'] .'</h7>';
-							echo '</li>';
-						}
-						echo "</ul>";
-						?>
+					<div class="col-xs-6">
+						<ul class='specs'>
+							<li>Beoordeling</li>
+							<?php 
+							$field = get_field_object( "rating" );
+							if ($field['value']) : echo $field['label']." : ".$field['value']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "opmerking" );
+							if ($field['value']) : echo $field['value']."<br>"; endif;
+							?>
+							<li>Haven weetjes</li>
+							<?php 
+							$field = get_field_object( "prijs" );
+							if ($field['value']) : echo $field['label']." : ".$field['value']." euro"."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "ligplaatsen" );
+							if ($field['value']) : echo $field['value']." ".$field['name']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "diepte" );
+							if ($field['value']) : echo $field['label']." : ".$field['value']." meter"."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "externe_url" );
+							if ($field['value']) : echo $field['value']."<br>"; endif;
+							?>
+						</ul>
 					</div>
+					<div class="col-xs-6">
+						<ul class='specs'>
+							<li>Voorzieningen</li>
+							<?php 
+							$field = get_field_object( "wc" );
+							if ($field['value']) : echo $field['label']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "douche" );
+							if ($field['value']) : echo $field['label']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "electra" );
+							if ($field['value']) : echo $field['label']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "water" );
+							if ($field['value']) : echo $field['label']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "vuilwater" );
+							if ($field['value']) : echo $field['label']."<br>"; endif;
+							?>
+							<?php 
+							$field = get_field_object( "voorzieningen_opmerking" );
+							if ($field['value']) : echo $field['value']."<br>"; endif;
+							?>
+						</ul>
+					</div>
+					
 				</div>
 			</div>
+			
 			<?php endif; ?>
 
 			<?php the_content(); ?>
