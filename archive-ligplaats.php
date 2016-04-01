@@ -63,6 +63,7 @@ get_header(); ?>
 			</header><!-- .page-header -->
 
 		<?php if ( have_posts() ) : ?>
+			<div class="entry-content">
 			<div class="acf-map archivemap">
 			<?php
 			// Start the Loop.
@@ -82,6 +83,7 @@ get_header(); ?>
 			// End the loop.
 			endwhile; ?>
 
+			</div>
 			</div>
 			<?php
 			// Previous/next page navigation.
