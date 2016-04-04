@@ -6,6 +6,7 @@ function theme_enqueue_styles() {
 
     $parent_style = 'parent-style';
 
+    wp_enqueue_script( 'google-map-cluster', 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js', array(), '3', true );
     wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', array(), '3', true );
     wp_enqueue_script( 'google-map-init', get_stylesheet_directory_uri() . '/js/google-maps.js', array('google-map', 'jquery'), '0.1', true );
 

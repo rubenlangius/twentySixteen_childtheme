@@ -31,17 +31,38 @@ function render_map( $el ) {
 	var map = new google.maps.Map( $el[0], args);
 
 	// add a markers reference
-	map.markers = [];
+	var markerslist = [];
 
 	// add markers
 	$markers.each(function(){
 
-    	add_marker( $(this), map );
+    	add_marker( $(this), map, markerslist );
 
 	});
 
 	// center map
-	center_map( map );
+	center_map( map , markerslist );
+
+	var clusterStyles = [
+  {
+    	url: '../wp-content/themes/skipahoy/js/pin.png',
+       	height: 32,
+      	width: 20,
+        anchorText: [-5, 0],
+        textColor: '#ffffff',
+        textSize: 10,
+        anchorIcon: [32, 10]
+  }
+];
+	
+	var mcOptions = {
+    gridSize: 15,
+    styles: clusterStyles,
+    maxZoom: 15,
+    averageCenter: true
+};
+
+	var mc = new MarkerClusterer(map, markerslist, mcOptions);
 
 }
 
@@ -59,7 +80,7 @@ function render_map( $el ) {
 *  @return	n/a
 */
 
-function add_marker( $marker, map ) {
+function add_marker( $marker, map, markerslist ) {
 
 	// var
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
@@ -90,7 +111,7 @@ function add_marker( $marker, map ) {
 	}
 
 	// add to array
-	map.markers.push( marker );
+	markerslist.push( marker );
 
 	// if marker contains HTML, add it to an infoWindow
 	if( $marker.html() )
@@ -123,13 +144,13 @@ function add_marker( $marker, map ) {
 *  @return	n/a
 */
 
-function center_map( map ) {
+function center_map( map , markerslist ) {
 
 	// vars
 	var bounds = new google.maps.LatLngBounds();
 
 	// loop through all markers and create bounds
-	$.each( map.markers, function( i, marker ){
+	$.each( markerslist, function( i, marker ){
 
 		var latlng = new google.maps.LatLng( marker.position.lat(), marker.position.lng() );
 
@@ -138,7 +159,7 @@ function center_map( map ) {
 	});
 
 	// only 1 marker?
-	if( map.markers.length == 1 )
+	if( markerslist.length == 1 )
 	{
 		// set center of map
 	    map.setCenter( bounds.getCenter() );
